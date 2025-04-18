@@ -1,0 +1,264 @@
+{
+	"info": {
+		"_postman_id": "1d412d05-b1a6-46a7-8f9a-5756a612360f",
+		"name": "Blockstak",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "9115809",
+		"_collection_link": "https://dkkkundu.postman.co/workspace/DIPTO-PERSONAL~cd37373d-090b-4547-841b-06cd8ae23bc2/collection/9115809-1d412d05-b1a6-46a7-8f9a-5756a612360f?action=share&source=collection_link&creator=9115809"
+	},
+	"item": [
+		{
+			"name": "authentication",
+			"item": [
+				{
+					"name": "registration",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{main_url}}/api/auth/register/?username=dipto_kumar_kundu2s&password=admin343%232s",
+							"host": [
+								"{{main_url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"register",
+								""
+							],
+							"query": [
+								{
+									"key": "username",
+									"value": "dipto_kumar_kundu2s"
+								},
+								{
+									"key": "password",
+									"value": "admin343%232s"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "username",
+									"value": "dkkundu",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "dk843070993",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{main_url}}/api/auth/token/",
+							"host": [
+								"{{main_url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"token",
+								""
+							],
+							"query": [
+								{
+									"key": "username",
+									"value": "dipto_kumar_kundu",
+									"disabled": true
+								},
+								{
+									"key": "password",
+									"value": "admin343%23",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "refresh",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{main_url}}/api/auth/refresh/?refresh_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJka2t1bmR1IiwiZXhwIjoxNzQ1NjA1MDk0fQ.hDv7uSLgpPXL0_nxYruVgjvLDNJZan69-lcgYJ4gefQ",
+							"host": [
+								"{{main_url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"refresh",
+								""
+							],
+							"query": [
+								{
+									"key": "refresh_token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJka2t1bmR1IiwiZXhwIjoxNzQ1NjA1MDk0fQ.hDv7uSLgpPXL0_nxYruVgjvLDNJZan69-lcgYJ4gefQ"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "news",
+			"item": [
+				{
+					"name": "Saved News",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "{{main_url}}/api/v1/news"
+					},
+					"response": []
+				},
+				{
+					"name": "save-latest-news",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"url": "{{main_url}}/api/v1/news/save-latest"
+					},
+					"response": []
+				},
+				{
+					"name": "headlines by country",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "{{main_url}}/api/v1/news/headlines/country/us"
+					},
+					"response": []
+				},
+				{
+					"name": "headlines by source",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "{{main_url}}/api/v1/news/headlines/source/the-verge"
+					},
+					"response": []
+				},
+				{
+					"name": "headlines by filter",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "{{token}}"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{main_url}}/api/v1/news/headlines/filter?country=us&source=the-verge",
+							"host": [
+								"{{main_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"news",
+								"headlines",
+								"filter"
+							],
+							"query": [
+								{
+									"key": "country",
+									"value": "us"
+								},
+								{
+									"key": "source",
+									"value": "the-verge"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "main_url",
+			"value": "http://0.0.0.0:9000",
+			"type": "string"
+		},
+		{
+			"key": "token",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJka2t1bmR1Iiwic2NvcGUiOiJhcGk6YWNjZXNzIiwiZXhwIjoxNzQ1MDAyMTEyfQ.nJ1uZTAuXc2nQrse35CUlfdKFaboDtIPQ7yIJN2vKCg",
+			"type": "string"
+		}
+	]
+}
