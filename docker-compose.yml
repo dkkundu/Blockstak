@@ -1,0 +1,13 @@
+version: "3.9"
+
+services:
+  fastapi:
+    build: .
+    container_name: fastapi-app
+    ports:
+      - "${FASTAPI_HOST_PORT}:8000"  # Expose the internal port 8000 as the external port defined in .env
+    env_file:
+      - .env  # Load environment variables from the .env file
+    volumes:
+      - .:/app
+    restart: always

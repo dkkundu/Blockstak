@@ -1,0 +1,15 @@
+PROJECT_NAME="Backend Developer Evaluation Task for Blockstak"
+DEBUG=True
+SECRET_KEY=mysecretkey
+WHITE_LIST=http://localhost:8000,http://localhost:9000
+
+# Define the port
+MYSQL_HOST=192.168.55.101
+MYSQL_PORT=3306
+MYSQL_DB=MYSQL_DB_NAME
+MYSQL_USER=MYSQL_USER_NAME
+MYSQL_PASSWORD=MYSQL_USER_PASSWORD
+NEWS_API_KEY=NEWS_API_KEY_form_newsapi.org
+
+# Define the port
+FASTAPI_HOST_PORT=5000
