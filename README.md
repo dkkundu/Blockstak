@@ -33,7 +33,7 @@ This FastAPI backend service provides a secure, token-based API with 5 endpoints
    Update the following values in the `.env` file as per your local setup:
 
    ```env
-   PROJECT_NAME="Backend Developer Evaluation Task for Blockstak"
+   PROJECT_NAME="Backend for Blockstak"
    DEBUG=True
    SECRET_KEY=mysecretkey
    WHITE_LIST=http://localhost:8000,http://localhost:9000

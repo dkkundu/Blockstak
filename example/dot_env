@@ -1,4 +1,4 @@
-PROJECT_NAME="Backend Developer Evaluation Task for Blockstak"
+PROJECT_NAME="Backend for Blockstak"
 DEBUG=True
 SECRET_KEY=mysecretkey
 WHITE_LIST=http://localhost:8000,http://localhost:9000
