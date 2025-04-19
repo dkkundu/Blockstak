@@ -1,6 +1,6 @@
 # Backend for Blockstak
 
-This is a **FastAPI** project built for the Blockstak backend developer evaluation task. It exposes a set of secure, token-authenticated REST API endpoints and is designed to run both locally (via `uvicorn`) and in a Dockerized environment.
+This is a **FastAPI** project built for the Blockstak. It exposes a set of secure, token-authenticated REST API endpoints and is designed to run both locally (via `uvicorn`) and in a Dockerized environment.
 
 ---
 
@@ -83,7 +83,7 @@ This FastAPI backend service provides a secure, token-based API with 5 endpoints
    docker compose up --build
    ```
 
-2. The FastAPI app will be available on port `9000`.
+2. The FastAPI app will be available on the port specified in the `.env` file under `FASTAPI_HOST_PORT`. By default, this is set to `8000`.
 
 ---
 
@@ -130,8 +130,11 @@ This project includes 5 main API endpoints, all documented in the provided Postm
 ## 📚 Additional Documentation
 
 - **OpenAPI Docs:** Once the server is running, you can access the auto-generated API documentation at:
-  - Swagger UI: [http://localhost:9000/docs](http://localhost:9000/docs)
-  - ReDoc: [http://localhost:9000/redoc](http://localhost:9000/redoc)
+
+- The FastAPI app will be available on the port specified in the `.env` file under `FASTAPI_HOST_PORT`. By default, this is set to `8000`.
+
+  - Swagger UI: [http://localhost:8000/docs](http://localhost:9000/docs)
+  - ReDoc: [http://localhost:8000/redoc](http://localhost:9000/redoc)
 
 - **Postman Collection:** Import the Postman collection file located at:
   `example/Blockstak.postman_collection.json`
