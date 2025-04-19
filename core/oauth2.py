@@ -31,6 +31,7 @@ def authenticate_user(username: str, password: str, db: Session):
     logger.error(f"Authentication failed for user '{username}'.")
     return None
 
+
 def create_access_token(data: dict, expires_delta: timedelta = None):
     to_encode = data.copy()
     if expires_delta:
@@ -42,6 +43,7 @@ def create_access_token(data: dict, expires_delta: timedelta = None):
     logger.debug(f"Access token created for: {data.get('sub')}")
     return encoded_jwt
 
+
 def create_refresh_token(data: dict, expires_delta: timedelta = None):
     to_encode = data.copy()
     expire = datetime.utcnow() + (expires_delta or timedelta(days=settings.REFRESH_TOKEN_EXPIRE_MINUTES))  # 7 days default
@@ -49,6 +51,7 @@ def create_refresh_token(data: dict, expires_delta: timedelta = None):
     encoded_jwt = jwt.encode(to_encode, settings.SECRET_KEY, algorithm=settings.ALGORITHM)
     logger.debug(f"Refresh token created for: {data.get('sub')}")
     return encoded_jwt
+
 
 async def get_current_client(token: str = Depends(oauth2_scheme), db: Session = Depends(get_db)):
     credentials_exception = HTTPException(
@@ -72,6 +75,7 @@ async def get_current_client(token: str = Depends(oauth2_scheme), db: Session = 
     logger.debug(f"User '{username}' retrieved successfully from token.")
     return user
 
+
 @oauth2_router.post("/register")
 async def register_user(username: str, password: str, db: Session = Depends(get_db)):
     existing_user = db.query(User).filter(User.username == username).first()
@@ -93,6 +97,7 @@ async def register_user(username: str, password: str, db: Session = Depends(get_
         data={"username": new_user.username},
         message="User registered successfully"
     )
+
 
 @oauth2_router.post("/token")
 async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)):
@@ -119,6 +124,7 @@ async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(
         },
         message="Login successful"
     )
+
 
 @oauth2_router.post("/refresh")
 async def refresh_access_token(refresh_token: str, db: Session = Depends(get_db)):

@@ -2,7 +2,7 @@ import pytest
 from fastapi.testclient import TestClient
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from config.mysql_connection import Base, get_db
+from config.mysql_connection import Base
 from main import app
 
 # Use in-memory SQLite for testing
@@ -14,13 +14,12 @@ TestingSessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engin
 Base.metadata.create_all(bind=engine)
 
 
-
 # Override get_db dependency
-
 @pytest.fixture
 def client():
     with TestClient(app) as c:
         yield c
+
 
 @pytest.fixture(autouse=True)
 def reset_database():
@@ -40,10 +39,10 @@ def test_register_user(client):
     else:
         assert response.status_code == 400
         assert response.json()["message"] == "Unable to register user. Username already exists."
-        assert response.json()["success"] == False
+        assert not response.json()["success"]
 
 
-# # Test login endpoint
+# Test login endpoint
 def test_login(client):
     response = client.post("/api/auth/token/", data={"username": "uniqueuser", "password": "testpass"})
     assert response.status_code == 200
@@ -51,13 +50,10 @@ def test_login(client):
     assert "refresh_token" in response.json()["data"]
     assert response.json()["message"] == "Login successful"
 
-  
-
 
 # #Test refresh token endpoint
 def test_refresh_token(client):
     response = client.post("/api/auth/token/", data={"username": "uniqueuser", "password": "testpass"})
-    #access_token = response.json()["data"]["access_token"]
     refresh_token = response.json()["data"]["refresh_token"]
     response = client.post("/api/auth/refresh/", params={"refresh_token": refresh_token})
 
@@ -90,7 +86,6 @@ def test_save_latest_news(client):
     headers = {"Authorization": f"Bearer {access_token}"}
     response = client.post("api/v1/news/save-latest", headers=headers)
 
-
     if response.status_code != 200:
         assert response.status_code == 500
         assert response.json()["message"] == "Failed to fetch news"
@@ -98,7 +93,6 @@ def test_save_latest_news(client):
         assert response.status_code == 200
         assert "data" in response.json()
         assert response.json()["message"] == "Latest news saved successfully"
-
 
 
 # Test fetching headlines by country
@@ -113,10 +107,9 @@ def test_headlines_by_country(client):
         assert response.status_code == 200
         assert response.json()["message"] == "News fetched successfully"
         assert "data" in response.json()
- 
 
 
-# # Test fetching headlines by source
+# Test fetching headlines by source
 def test_headlines_by_source(client):
     response = client.post("/api/auth/token/", data={"username": "uniqueuser", "password": "testpass"})
     access_token = response.json()["data"]["access_token"]
@@ -125,7 +118,7 @@ def test_headlines_by_source(client):
 
     if response.status_code != 200:
         assert response.status_code == 500
-    else:   
+    else:
         assert response.status_code == 200
         assert response.json()["message"] == "News fetched successfully"
         assert "data" in response.json()
@@ -146,4 +139,3 @@ def test_filter_headlines(client):
         assert response.status_code == 200
         assert response.json()["message"] == "News fetched successfully"
         assert "data" in response.json()
-

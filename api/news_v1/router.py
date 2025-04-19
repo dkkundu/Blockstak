@@ -3,7 +3,7 @@ from fastapi import APIRouter, Depends, status
 from datetime import datetime
 from typing import List, Optional
 from sqlalchemy.orm import Session
-from config.mysql_connection import  get_db, engine
+from config.mysql_connection import get_db, engine
 from .models import Base, News
 from .schemas import NewsSchema
 from fastapi.encoders import jsonable_encoder
@@ -19,8 +19,8 @@ response_data = Helper()
 Base.metadata.create_all(bind=engine)
 news_api_v1 = APIRouter()
 
-
-NEWS_API_KEY = settings.NEWS_API_KEY # 🔐 replace with your actual key
+# 🔐 replace with your actual key
+NEWS_API_KEY = settings.NEWS_API_KEY
 NEWSAPI_BASE = "https://newsapi.org/v2"
 
 

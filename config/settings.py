@@ -2,6 +2,7 @@
 from pydantic_settings import BaseSettings
 from functools import lru_cache
 
+
 class Settings(BaseSettings):
     PROJECT_NAME: str = "Backend Developer Evaluation Task for Blockstak"
     DEBUG: bool = True
@@ -20,6 +21,7 @@ class Settings(BaseSettings):
 
     class Config:
         env_file = ".env"
+
 
 @lru_cache()
 def get_settings():

@@ -1,7 +1,8 @@
 from sqlalchemy import Column, Integer, String, ForeignKey, DateTime, Text
-from sqlalchemy.orm import relationship, declarative_base
+from sqlalchemy.orm import relationship
 from core.models.users import User
 from config.mysql_connection import Base
+
 
 class News(Base):
     __tablename__ = "news"
